@@ -1,0 +1,37 @@
+package com.spring.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import com.spring.entity.Product;
+import com.spring.service.ProductService;
+
+//Fill your code here
+@Controller
+@RequestMapping("/product")
+public class ProductController {    
+
+	//Fill your code here1
+	@Autowired
+	ProductService service;
+	
+	@RequestMapping("/list")
+	public String listProducts(Model model) {
+		//Fill your code here
+		model.addAttribute("products", service.getProductList());
+		return "list-products";
+	}	
+	
+	
+	//Fill your code here
+	@RequestMapping("/searchProduct")
+	public String searchProduct(@RequestParam("category") String category,
+			@RequestParam("type") String type,Model model){
+		//Fill your code here
+		model.addAttribute("products", service.findByCategoryAndType(category, type));
+		return "list-products";
+
+	}
+}

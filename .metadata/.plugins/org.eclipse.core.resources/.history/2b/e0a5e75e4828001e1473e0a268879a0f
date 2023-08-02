@@ -1,0 +1,20 @@
+import java.awt.Event;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
+		Event e1 = context.getBean("event1", Event.class);
+		Event e2 = context.getBean("event2", Event.class);
+		Event e3 = context.getBean("event3", Event.class);
+		
+		
+	}
+
+}

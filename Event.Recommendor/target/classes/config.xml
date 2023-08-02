@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+	<bean id="event1" class="spring.Event">
+		<property name="eventName" value="Magic Show"></property>
+		<property name="eventOrganiser" value="Vadivel"></property>
+		<property name="fare" value="650"></property>	
+	</bean>
+	<bean id="event2" class="spring.Event">
+		<property name="eventName" value="Puppet Show"></property>
+		<property name="eventOrganiser" value="Maggie"></property>
+		<property name="fare" value="250"></property>	
+	</bean>
+	<bean id="event3" class="spring.Event">
+		<property name="eventName" value="Standup Comedy"></property>
+		<property name="eventOrganiser" value="Arun"></property>
+		<property name="fare" value="500"></property>	
+	</bean>
+</beans>

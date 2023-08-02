@@ -1,0 +1,41 @@
+import com.spring.entity.*;
+import com.spring.dao.*;
+import com.spring.service.*;
+import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+		Logger log = Logger.getLogger("org.hibernate");
+		log.setLevel(Level.OFF);
+		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+		@SuppressWarnings("resource")
+		
+		//Fill your code here
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");  
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		OwnerDAO dao = context.getBean("ownerService", OwnerService.class);
+		List<Owner> ownerList = dao.getAllOwners();
+		
+		for(Owner o : ownerList) {
+			System.out.println(o.getName());
+		}
+		
+		System.out.println("Enter the name of the person you want to seach");
+		String name = br.readLine();
+		String result = dao.getOwnerNumberByName(name);
+		System.out.println(result);
+
+		System.exit(0);
+	}
+
+}

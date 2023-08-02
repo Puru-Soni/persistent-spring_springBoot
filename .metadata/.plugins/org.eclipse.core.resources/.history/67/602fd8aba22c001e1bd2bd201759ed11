@@ -1,0 +1,65 @@
+import com.spring.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Main {
+	public static void main(String[] args) {
+		Logger log = Logger.getLogger("org.hibernate");
+		log.setLevel(Level.OFF);
+		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+		
+//		/////////////////////////////////////
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of owners you want to create");
+		int o = sc.nextInt();
+		sc.nextLine();
+		
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		Owner[] ownerList = new Owner[o];
+		
+		for(int i = 1; i <= o; i++ ) {
+			ownerList[i-1] = context.getBean("owner", Owner.class);
+			System.out.println("Enter the Name and Password of the Owner");
+			ownerList[i-1].setProperties(sc.nextLine(), sc.nextLine());
+		}
+		
+		System.out.println("Enter the number of events you want to create");
+		int e = sc.nextInt();
+		sc.nextLine();
+		
+		String[] res = new String[e];
+		Event[] eventList = new Event[e];
+		
+		for(int i = 1; i <= e; i++) {
+			eventList[i-1] = context.getBean("event", Event.class);
+			System.out.println("Enter the  Event name");
+			eventList[i-1].setProperties(sc.nextLine());
+			
+			System.out.println("Select any option from the list and enter the number");
+			for(int j = 1; j <= o; j++){
+				System.out.println(j + ")" + ownerList[j-1].getName());
+			}
+			System.out.println("Enter the choice");
+			int ch = sc.nextInt();
+			sc.nextLine();
+			
+			res[i-1] = eventList[i-1].getEventName() + " - " + ownerList[ch-1].getName();
+		}
+		
+		int id = 1;
+		System.out.println("...Listing events...");
+		for(String s : res) {
+			System.out.println((id++) + ")" + s);
+		}
+	}
+
+}

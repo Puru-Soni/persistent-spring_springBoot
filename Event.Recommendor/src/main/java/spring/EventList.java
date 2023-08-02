@@ -1,0 +1,24 @@
+package spring;
+
+import java.util.ArrayList;
+
+public class EventList {
+
+	ArrayList<Event> eventMenu = new ArrayList<Event>();
+	
+	public void insert(Event event) {
+		eventMenu.add(event);
+	}
+	
+	public ArrayList<String> recommendfor(Double budget){
+		ArrayList<String> res = new ArrayList<String>();
+		
+		for(Event e : eventMenu) {
+			if(budget > e.getFare()) {
+				res.add(e.getEventName() + "-" + (int)Math.floor(budget/e.getFare()));
+			}
+		}
+		if(res.size() == 0 || res.isEmpty()) res.add("No Shows available");
+		return res;
+	}
+}
